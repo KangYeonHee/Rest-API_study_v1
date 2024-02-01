@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="job">
+    <select id = "selectJobList" resultType = "com.example.demo.config.api.job.vo.JobVO" parameterType = "com.example.demo.config.api.job.vo.JobVO">
+        SELECT ID AS ID
+               , NAME AS NAME
+               , INCOME AS INCOME
+          FROM JOB
+        <if test = "name != null">
+            WHERE NAME LIKE '%${name}%'
+        </if>
+    </select>
+
+    <select id = "selectJob" resultType = "com.example.demo.config.api.job.vo.JobVO" parameterType = "com.example.demo.config.api.job.vo.JobVO">
+        SELECT ID AS ID
+               , NAME AS NAME
+               , INCOME AS INCOME
+          FROM JOB
+        WHERE ID = #{id}
+    </select>
+
+    <insert id = "insertJob" parameterType = "com.example.demo.config.api.job.vo.JobVO">
+        INSERT INTO JOB(ID
+                        , NAME
+                        , INCOME
+        )
+                 VALUES(${id}
+                        , '${name}'
+                        , ${income}
+        )
+    </insert>
+
+    <update id = "updateJob" parameterType = "com.example.demo.config.api.job.vo.JobVO">
+        UPDATE JOB
+        SET ID = #{id}
+            , NAME = '${name}'
+            , INCOME = ${income}
+        WHERE ID = #{id}
+    </update>
+
+    <delete id = "deleteJob" parameterType = "com.example.demo.config.api.job.vo.JobVO">
+        DELETE FROM JOB
+        WHERE ID = #{id}
+    </delete>
+
+</mapper>
