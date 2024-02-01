@@ -1,4 +1,4 @@
-package com.example.demo.config.api.response.status;
+package com.example.demo.api.response.status;
 
 public class StatusEntity<T> {
 

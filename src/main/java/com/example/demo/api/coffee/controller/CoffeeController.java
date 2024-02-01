@@ -1,8 +1,8 @@
-package com.example.demo.config.api.coffee.controller;
+package com.example.demo.api.coffee.controller;
 
-import com.example.demo.config.api.coffee.vo.CoffeeVO;
-import com.example.demo.config.api.response.status.StatusCode;
-import com.example.demo.config.api.response.status.StatusEntity;
+import com.example.demo.api.response.status.StatusCode;
+import com.example.demo.api.response.status.StatusEntity;
+import com.example.demo.api.coffee.vo.CoffeeVO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,6 @@
 package com.example.demo.api.coffee.dao;
 
-import com.example.demo.config.api.coffee.dao.CoffeeDao;
-import com.example.demo.config.api.coffee.vo.CoffeeVO;
+import com.example.demo.api.coffee.vo.CoffeeVO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

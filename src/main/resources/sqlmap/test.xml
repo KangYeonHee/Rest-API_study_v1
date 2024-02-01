@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="coffee">
-    <select id = "selectCoffeeList" resultType = "com.example.demo.config.api.coffee.vo.CoffeeVO" parameterType="com.example.demo.config.api.coffee.vo.CoffeeVO">
+    <select id = "selectCoffeeList" resultType = "com.example.demo.api.coffee.vo.CoffeeVO" parameterType="com.example.demo.api.coffee.vo.CoffeeVO">
         SELECT ID AS ID
                , NAME AS NAME
           FROM COFFEE
@@ -12,7 +12,7 @@
          LIMIT #{rowNum}, #{limitNum}
     </select>
 
-    <select id = "selectCoffee" resultType = "com.example.demo.config.api.coffee.vo.CoffeeVO" parameterType="com.example.demo.config.api.coffee.vo.CoffeeVO">
+    <select id = "selectCoffee" resultType = "com.example.demo.api.coffee.vo.CoffeeVO" parameterType="com.example.demo.api.coffee.vo.CoffeeVO">
         SELECT ID AS ID
                , NAME AS NAME
           FROM COFFEE
