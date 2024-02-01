@@ -1,6 +1,6 @@
-package com.example.demo.config.api.coffee.dao;
+package com.example.demo.api.coffee.dao;
 
-import com.example.demo.config.api.coffee.vo.CoffeeVO;
+import com.example.demo.api.coffee.vo.CoffeeVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

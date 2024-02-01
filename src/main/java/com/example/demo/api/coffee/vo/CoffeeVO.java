@@ -1,4 +1,4 @@
-package com.example.demo.config.api.coffee.vo;
+package com.example.demo.api.coffee.vo;
 
 import java.util.UUID;
 

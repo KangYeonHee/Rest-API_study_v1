@@ -1,4 +1,4 @@
-package com.example.demo.config.api.job.vo;
+package com.example.demo.api.job.vo;
 
 public class JobVO {
     private int id;

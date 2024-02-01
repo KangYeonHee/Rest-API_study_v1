@@ -1,6 +1,6 @@
-package com.example.demo.config.api.job.dao;
+package com.example.demo.api.job.dao;
 
-import com.example.demo.config.api.job.vo.JobVO;
+import com.example.demo.api.job.vo.JobVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,6 +20,14 @@ public class JobDao {
         return list;
     }
 
+    public JobVO overlabName(String name) {
+        JobVO jobVO = new JobVO();
+        jobVO.setName(name);
+        JobVO vo = sqlSession.selectOne("job.overlabName", jobVO);
+
+        return vo;
+    }
+
     public JobVO getJobById(int id) {
         JobVO jobVO = new JobVO();
         jobVO.setId(id);
@@ -29,15 +37,13 @@ public class JobDao {
     }
 
     public void insertJob(JobVO vo) {
-        int count;
-        count = sqlSession.insert("job.insertJob", vo);
+        sqlSession.insert("job.insertJob", vo);
 
-        System.out.println("insert 잘 됨 " + count);
+        System.out.println("insert 잘 됨 " + vo.getId());
     }
 
     public void updateJob(JobVO vo) {
-        int count;
-        count = sqlSession.update("job.updateJob", vo);
+        int count = sqlSession.update("job.updateJob", vo);
 
         System.out.println("update 잘 됨 " + count);
     }

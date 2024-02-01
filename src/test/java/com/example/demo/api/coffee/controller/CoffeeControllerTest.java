@@ -1,6 +1,6 @@
 package com.example.demo.api.coffee.controller;
 
-import com.example.demo.config.api.coffee.vo.CoffeeVO;
+import com.example.demo.api.coffee.vo.CoffeeVO;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
