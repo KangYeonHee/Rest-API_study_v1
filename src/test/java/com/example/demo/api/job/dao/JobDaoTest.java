@@ -15,7 +15,7 @@ class JobDaoTest {
 
     @Test
     void jobTest() {
-        List<JobVO> list = jobDao.getJobList();
+        List<JobVO> list = jobDao.getJobList("ㄴㄴ");
 
         for (JobVO j : list) {
             System.out.println("ID: " + j.getId());
