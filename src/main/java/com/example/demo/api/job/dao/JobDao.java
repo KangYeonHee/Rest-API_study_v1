@@ -12,9 +12,9 @@ public class JobDao {
     @Autowired
     private SqlSession sqlSession;
 
-    public List<JobVO> getJobList() {
+    public List<JobVO> getJobList(String name) {
         JobVO jobVO = new JobVO();
-//        jobVO.setName("er");
+        jobVO.setName(name);
         List<JobVO> list = sqlSession.selectList("job.selectJobList", jobVO);
 
         return list;
@@ -36,24 +36,19 @@ public class JobDao {
         return vo;
     }
 
-    public void insertJob(JobVO vo) {
+    public int insertJob(JobVO vo) {
         sqlSession.insert("job.insertJob", vo);
-
-        System.out.println("insert 잘 됨 " + vo.getId());
+        return vo.getId();
     }
 
-    public void updateJob(JobVO vo) {
+    public int updateJob(JobVO vo) {
         int count = sqlSession.update("job.updateJob", vo);
-
-        System.out.println("update 잘 됨 " + count);
+        return count;
     }
 
     public void deleteJob(int id) {
-        int count;
         JobVO jobVO = new JobVO();
         jobVO.setId(id);
-        count = sqlSession.delete("job.deleteJob", jobVO);
-
-        System.out.println("delete 잘 됨 " + count);
+        sqlSession.delete("job.deleteJob", jobVO);
     }
 }

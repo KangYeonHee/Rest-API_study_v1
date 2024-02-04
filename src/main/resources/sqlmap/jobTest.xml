@@ -37,8 +37,7 @@
 
     <update id = "updateJob" parameterType = "com.example.demo.api.job.vo.JobVO">
         UPDATE JOB
-        SET ID = #{id}
-            , NAME = '${name}'
+        SET   NAME = '${name}'
             , INCOME = ${income}
         WHERE ID = #{id}
     </update>
