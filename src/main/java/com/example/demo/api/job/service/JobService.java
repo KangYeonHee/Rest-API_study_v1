@@ -57,10 +57,11 @@ public class JobService {
             return null;
         }
 
-        JobVO vo = new JobVO();
-        vo.setId(id);
-        vo.setName(name);
-        vo.setIncome(income);
+        JobVO vo = JobVO.builder()
+                .id(id)
+                .name(name)
+                .income(income)
+                .build();
 
         int count = dao.updateJob(vo);
         if(count == 0) {

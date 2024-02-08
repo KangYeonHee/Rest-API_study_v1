@@ -13,24 +13,30 @@ public class JobDao {
     private SqlSession sqlSession;
 
     public List<JobVO> getJobList(String name) {
-        JobVO jobVO = new JobVO();
-        jobVO.setName(name);
+        JobVO jobVO = JobVO.builder()
+                .name(name)
+                .build();
+
         List<JobVO> list = sqlSession.selectList("job.selectJobList", jobVO);
 
         return list;
     }
 
     public JobVO overlabName(String name) {
-        JobVO jobVO = new JobVO();
-        jobVO.setName(name);
+        JobVO jobVO = JobVO.builder()
+                .name(name)
+                .build();
+
         JobVO vo = sqlSession.selectOne("job.overlabName", jobVO);
 
         return vo;
     }
 
     public JobVO getJobById(int id) {
-        JobVO jobVO = new JobVO();
-        jobVO.setId(id);
+        JobVO jobVO = JobVO.builder()
+                .id(id)
+                .build();
+
         JobVO vo = sqlSession.selectOne("job.selectJob", jobVO);
 
         return vo;
@@ -47,8 +53,10 @@ public class JobDao {
     }
 
     public void deleteJob(int id) {
-        JobVO jobVO = new JobVO();
-        jobVO.setId(id);
+        JobVO jobVO = JobVO.builder()
+                .id(id)
+                .build();
+
         sqlSession.delete("job.deleteJob", jobVO);
     }
 }
