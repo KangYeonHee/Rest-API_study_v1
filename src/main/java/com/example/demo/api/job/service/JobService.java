@@ -34,16 +34,29 @@ public class JobService {
     }
 
     // 등록
-    public int insertJob(String name, int income) {
-        JobVO vo = new JobVO();
-        vo.setName(name);
-        vo.setIncome(income);
+    public int insertJob(JobVO vo) {
+        Optional<JobVO> op = Optional.ofNullable(dao.overlabName(vo.getName()));
+        if(op.isPresent()){
+            return 0;
+        }
+
         int id = dao.insertJob(vo);
         return id;
     }
 
     // 수정
     public JobVO updateJob(int id, String name, int income) {
+
+        Optional<JobVO> op1 = Optional.ofNullable(dao.getJobById(id));
+        if(!op1.isPresent()){
+            return null;
+        }
+
+        Optional<JobVO> op2 = Optional.ofNullable(dao.overlabName(name));
+        if(op2.isPresent()){
+            return null;
+        }
+
         JobVO vo = new JobVO();
         vo.setId(id);
         vo.setName(name);
@@ -51,7 +64,7 @@ public class JobService {
 
         int count = dao.updateJob(vo);
         if(count == 0) {
-            throw new IllegalArgumentException();
+            return null;
         }
         return vo;
     }

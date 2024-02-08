@@ -6,6 +6,10 @@ public class JobVO {
     private int income;
 
     public JobVO() {}
+    public JobVO(String name, int income) {
+        this.name = name;
+        this.income = income;
+    }
     public JobVO(int id, String name, int income) {
         this.id = id;
         this.name = name;

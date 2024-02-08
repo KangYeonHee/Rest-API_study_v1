@@ -5,7 +5,8 @@ import org.springframework.http.HttpStatus;
 public enum StatusCode {
 
     OK(200)
-    , NO_DATA(555);
+    , NO_DATA(555)
+    , OVERLAP(666);
 
     public int code;
 
