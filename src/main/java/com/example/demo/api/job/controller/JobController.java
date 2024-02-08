@@ -1,5 +1,7 @@
 package com.example.demo.api.job.controller;
 
+import ch.qos.logback.core.status.Status;
+import com.example.demo.api.job.service.JobService;
 import com.example.demo.api.response.status.StatusCode;
 import com.example.demo.api.response.status.StatusEntity;
 import com.example.demo.api.job.vo.JobVO;
@@ -13,63 +15,44 @@ import java.util.List;
 
 @RestController
 public class JobController {
-    private List<JobVO> jobs = new ArrayList<JobVO>();
+    private JobService service;
 
-    public JobController() {
-        jobs.add(new JobVO(0, "PD", 7800));
-        jobs.add(new JobVO(6, "ACTOR", 10000));
-        jobs.add(new JobVO(7, "POLICE", 4000));
+    public JobController(JobService service) {
+        this.service = service;
     }
 
     @GetMapping ("/jobs")
-    public List<JobVO> getJobs() { return jobs;}
+    public StatusEntity<List<JobVO>> getJobs(
+            @RequestParam(value = "name") String name
+    ) {
+        List<JobVO> list = service.getJobList(name);
+        return new StatusEntity<>(list, StatusCode.OK);
+    }
 
     @GetMapping ("/jobs/{id}")
     public StatusEntity<JobVO> getJobById(@PathVariable int id) {
-        return jobs.stream()
-              .filter(x -> x.getId() == id)
-              .map(x -> new StatusEntity<>(x, StatusCode.OK))
-              .findAny()
-              .orElseGet(() -> new StatusEntity<>(StatusCode.NO_DATA));
+        JobVO vo = service.getJobById(id);
+        StatusEntity<JobVO> result = new StatusEntity<>(vo, StatusCode.OK);
+        return result;
     }
 
     @PostMapping("/jobs")
-    public StatusEntity<JobVO> postJob(@RequestBody JobVO job) throws Exception {
-        for(JobVO j : jobs) {
-            if(job.getId() == j.getId()) {
-                throw new Exception();
-            }
-        }
-
-        jobs.add(job);
-        return new StatusEntity<>(job, StatusCode.OK);
+    public StatusEntity<Integer> insertJob(@RequestBody JobVO job) {
+        int result = service.insertJob(job);
+        StatusCode code = result > 0 ? StatusCode.OK : StatusCode.OVERLAP;
+        return new StatusEntity<>(result, code);
     }
 
     @PutMapping("/jobs/{id}")
-    public ResponseEntity<JobVO> putJob(@PathVariable int id, @RequestBody JobVO job) throws Exception {
-        for(JobVO j : jobs) {
-            if(j.getId() == id) {
-                int jobIndex = jobs.indexOf(j);
-                jobs.set(jobIndex, new JobVO(id, job.getName(), job.getIncome()));
-                JobVO resultJob = jobs.get(jobIndex);
-                return new ResponseEntity<>(
-                    resultJob, HttpStatus.OK
-                );
-            }
-        }
-
-        return new ResponseEntity<>( HttpStatus.NO_CONTENT );
+    public StatusEntity<JobVO> updateJob(@PathVariable int id, @RequestParam String name, @RequestParam int income) {
+        JobVO vo = service.updateJob(id, name, income);
+        StatusCode code = vo != null? StatusCode.OK : StatusCode.OVERLAP;
+        return new StatusEntity<>(vo, code);
     }
 
     @DeleteMapping("/jobs/{id}")
-    public String deleteJob(@PathVariable int id) throws Exception {
-        for(JobVO j : jobs) {
-            if(j.getId() == id) {
-                jobs.remove(j);
-                return "Delete Success";
-            }
-        }
-
-        throw new Exception();
+    public StatusEntity<Integer> deleteJob(@PathVariable int id) {
+        int result = service.deleteJob(id);
+        return new StatusEntity<>(result, StatusCode.OK);
     }
 }
