@@ -5,6 +5,8 @@ import com.example.demo.api.job.service.JobService;
 import com.example.demo.api.response.status.StatusCode;
 import com.example.demo.api.response.status.StatusEntity;
 import com.example.demo.api.job.vo.JobVO;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,13 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+@RequiredArgsConstructor
 @RestController
 public class JobController {
-    private JobService service;
 
-    public JobController(JobService service) {
-        this.service = service;
-    }
+//    @Autowired
+    private final JobService service;
+
+//    public JobController(JobService service) {
+//        this.service = service;
+//    }
 
     @GetMapping ("/jobs")
     public StatusEntity<List<JobVO>> getJobs(
