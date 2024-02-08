@@ -29,7 +29,11 @@ class JobServiceTest {
 
     @Test
     void insertJob() {
-        JobVO jobVO = new JobVO("cat", 2000);
+        JobVO jobVO = JobVO.builder()
+                .name("cat")
+                .income(2000)
+                .build();
+
         int id = service.insertJob(jobVO);
         Assertions.assertTrue(id > 0);
     }

@@ -38,16 +38,10 @@ class JobDaoTest {
 
     @Test
     void jobInsertTest() throws Throwable {
-        JobVO vo1 = new JobVO();
-        vo1.setName("AAA");
-        vo1.setIncome(2100);
-
-//        // name 중복체크
-//        JobVO overlab = jobDao.overlabName(vo1.getName());
-//        if(overlab != null) {
-//            System.out.println("작성한 name은 테이블에 이미 존재합니다.");
-//            return;
-//        }
+        JobVO vo1 = JobVO.builder()
+                .name("AAA")
+                .income(2100)
+                .build();
 
         Optional op = Optional.ofNullable(jobDao.overlabName(vo1.getName()));
 
@@ -60,14 +54,15 @@ class JobDaoTest {
 
     @Test
     void jobUpdateTest() {
-        JobVO vo1 = new JobVO();
-        vo1.setId(5);
-        vo1.setName("PROFESSOR8");
-        vo1.setIncome(2100);
+        JobVO vo1 = JobVO.builder()
+                .id(5)
+                .name("PROFESSOR")
+                .income(2100)
+                .build();
 
         // id 존재여부 체크
         Optional<JobVO> op = Optional.ofNullable(jobDao.getJobById(vo1.getId()));
-        op.orElseThrow( () -> new IllegalArgumentException());
+        JobVO jobVO = op.orElseThrow(() -> new IllegalArgumentException());
 
         // name 중복체크
         Optional<JobVO> op1 = Optional.ofNullable(jobDao.overlabName(vo1.getName()));
