@@ -1,16 +1,17 @@
 package com.example.demo.api.job.dao;
 
 import com.example.demo.api.job.vo.JobVO;
+import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Repository
 public class JobDao {
-    @Autowired
-    private SqlSession sqlSession;
+    private final SqlSession sqlSession;
 
     public List<JobVO> getJobList(String name) {
         JobVO jobVO = JobVO.builder()

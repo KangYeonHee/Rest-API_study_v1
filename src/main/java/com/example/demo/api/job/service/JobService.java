@@ -2,17 +2,20 @@ package com.example.demo.api.job.service;
 
 import com.example.demo.api.job.dao.JobDao;
 import com.example.demo.api.job.vo.JobVO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class JobService {
-    private JobDao dao;
-    public JobService(JobDao jobdao) {
-        this.dao = jobdao;
-    }
+    private final JobDao dao;
+
+//    public JobService(JobDao jobdao) {
+//        this.dao = jobdao;
+//    }
 
     // 전체조회
     public List<JobVO> getJobList(String name) {
